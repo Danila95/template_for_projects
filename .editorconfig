@@ -1,0 +1,94 @@
+# EditorConfig помогает разработчикам определять и поддерживать
+# единый стиль кодирования между различными редакторами и IDE
+# Документация: https://editorconfig.org
+
+# Указывает, что это корневой файл EditorConfig для проекта
+# Редактор прекратит поиск других .editorconfig файлов в родительских директориях
+root = true
+
+# Применяется ко всем файлам в проекте
+[*]
+# Кодировка файлов - UTF-8 (поддержка всех языков и символов)
+charset = utf-8
+
+# Тип отступов - пробелы (более консистентны между редакторами чем табы)
+indent_style = space
+
+# Размер отступа - 2 пробела (стандарт для JavaScript/TypeScript/React проектов)
+indent_size = 2
+
+# Стиль переноса строки - LF (Unix-style, используется в Git и большинстве проектов)
+# LF предпочтительнее CRLF для кроссплатформенной разработки
+end_of_line = lf
+
+# Автоматически добавлять пустую строку в конце файла
+# Это стандарт POSIX и требование многих линтеров
+insert_final_newline = true
+
+# Удалять пробелы в конце строк (trailing whitespace)
+# Это предотвращает ненужные изменения в Git и проблемы с линтерами
+trim_trailing_whitespace = true
+
+# Рекомендуемая максимальная длина строки для читаемости документации
+max_line_length = 80
+
+# Специфичные настройки для Markdown файлов
+[*.md]
+# В Markdown два пробела в конце строки создают перенос строки
+# Поэтому НЕ удаляем trailing whitespace в .md файлах
+trim_trailing_whitespace = false
+
+# Настройки для JSON файлов (package.json, tsconfig.json и т.д.)
+[*.json]
+# JSON файлы часто используют 2 пробела для отступов
+indent_size = 2
+
+# Настройки для YAML файлов (GitHub Actions, Docker Compose и т.д.)
+[*.{yml,yaml}]
+# YAML требует пробелы (не табы) и обычно использует 2 пробела
+indent_style = space
+indent_size = 2
+
+# Настройки для HTML файлов
+[*.html]
+# 2 пробела - стандарт для HTML в современной веб-разработке
+indent_size = 2
+
+# Настройки для CSS, SCSS, SASS файлов
+[*.{css,scss,sass,less}]
+# 2 пробела - стандарт для стилей
+indent_size = 2
+
+# Настройки для JavaScript и TypeScript файлов
+[*.{js,jsx,ts,tsx,mjs,cjs}]
+# 2 пробела - современный стандарт (Airbnb, Prettier, StandardJS)
+indent_size = 2
+
+# Опционально: можно задать кавычки, но лучше это делать в ESLint/Prettier
+# quote_type = single
+
+# Настройки для конфигурационных файлов
+[*.{config.js,config.ts,.eslintrc.js,.prettierrc.js}]
+indent_size = 2
+
+# Настройки для файлов, где могут использоваться табы
+[Makefile]
+# Makefile ТРЕБУЕТ использования табов (это синтаксическое требование)
+indent_style = tab
+
+# Настройки для Git конфигурации
+[.gitattributes]
+indent_style = space
+indent_size = 2
+
+# Настройки для конфигурационных файлов редакторов
+[*.{code-workspace,code-snippets}]
+indent_size = 2
+
+# Настройки для SVG файлов (векторная графика)
+[*.svg]
+# SVG это XML, обычно используется 2 пробела
+indent_size = 2
+
+
+
