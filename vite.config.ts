@@ -90,7 +90,7 @@ export default defineConfig(({ mode }) => {
     server: {
       // Порт сервера разработки
       // Берём из .env или используем 3000 по умолчанию
-      port: parseInt(env.VITE_PORT) || 3000,
+      port: env.VITE_PORT ? parseInt(env.VITE_PORT, 10) : 3000,
 
       // strictPort: true - если порт занят, сервер выдаст ошибку
       // strictPort: false - если порт занят, попробует следующий свободный
@@ -147,7 +147,7 @@ export default defineConfig(({ mode }) => {
     // Настройки для команды `vite preview` (просмотр production сборки)
     // ========================================================================
     preview: {
-      port: parseInt(env.VITE_PREVIEW_PORT) || 4173,
+      port: env.VITE_PREVIEW_PORT ? parseInt(env.VITE_PREVIEW_PORT, 10) : 4173,
       open: true,
       host: true,
     },
@@ -193,7 +193,7 @@ export default defineConfig(({ mode }) => {
           // id - путь к модулю (например: /node_modules/react/index.js)
           // Возвращаем имя чанка или undefined (для стандартного поведения)
           // ================================================================
-          manualChunks(id: string) {
+          manualChunks(id: string): string | undefined {
             // Выделяем React в отдельный vendor чанк
             // Эти библиотеки редко обновляются, поэтому браузер будет кэшировать их
             if (id.includes("node_modules/react")) {
@@ -212,6 +212,10 @@ export default defineConfig(({ mode }) => {
             if (id.includes("node_modules")) {
               return "vendor";
             }
+
+            // Явно возвращаем undefined для модулей приложения
+            // (они будут обработаны стандартным алгоритмом Vite)
+            return undefined;
           },
 
           // Формат имён файлов для лучшего кэширования

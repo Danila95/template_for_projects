@@ -1,26 +1,142 @@
 {
+  /**
+   * КОНФИГУРАЦИЯ TYPESCRIPT ДЛЯ NODE.JS ИНСТРУМЕНТОВ
+   * ================================================
+   * Эта конфигурация используется для файлов Node.js окружения:
+   * - vite.config.ts (конфигурация сборщика)
+   * - build скрипты
+   * - другие инструменты разработки
+   */
+  
   "compilerOptions": {
+    /* ========== ИНКРЕМЕНТАЛЬНАЯ КОМПИЛЯЦИЯ ========== */
+    
+    // Путь к файлу для кеширования информации о компиляции
+    // Ускоряет повторные сборки, сохраняя информацию о типах
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    
+    
+    /* ========== ЦЕЛЕВОЕ ОКРУЖЕНИЕ ========== */
+    
+    // Версия ECMAScript для генерируемого JavaScript кода
+    // ES2023 - современный стандарт, поддерживает последние возможности Node.js 18+
     "target": "ES2023",
+    
+    // Библиотеки типов, доступные в коде (автодополнение и проверка типов)
+    // ES2023 включает Promise, Array methods, Object methods и т.д.
     "lib": ["ES2023"],
+    
+    // Система модулей для генерируемого кода
+    // ESNext = современные ES модули (import/export)
     "module": "ESNext",
+    
+    // Дополнительные пакеты с типами для включения
+    // @types/node предоставляет типы для Node.js API (fs, path, process и т.д.)
     "types": ["node"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
+    
+    
+    /* ========== РЕЖИМ СБОРЩИКА (BUNDLER MODE) ========== */
+    
+    // Стратегия разрешения модулей - "bundler" оптимизирована для Vite/Webpack
+    // Понимает package.json exports, conditions и другие современные возможности
     "moduleResolution": "bundler",
+    
+    // Разрешает импорт файлов с расширением .ts/.tsx
+    // import './config.ts' - будет работать (обычно TypeScript требует без расширения)
     "allowImportingTsExtensions": true,
+    
+    // Строгий режим синтаксиса модулей
+    // Различает import type {} и import {} для оптимизации tree-shaking
     "verbatimModuleSyntax": true,
+    
+    // Принудительное определение файлов как модулей
+    // Даже без import/export файл считается модулем (не глобальным скриптом)
     "moduleDetection": "force",
+    
+    // Не генерировать JavaScript файлы
+    // Vite сам компилирует TypeScript, нам нужна только проверка типов
     "noEmit": true,
-
-    /* Linting */
+    
+    
+    /* ========== ПРОИЗВОДИТЕЛЬНОСТЬ ========== */
+    
+    // Пропускать проверку типов в .d.ts файлах из node_modules
+    // Значительно ускоряет компиляцию (проверяются только ваши файлы)
+    "skipLibCheck": true,
+    
+    
+    /* ========== СТРОГАЯ ПРОВЕРКА ТИПОВ ========== */
+    
+    // Включает все строгие проверки TypeScript (рекомендуется!)
+    // Эквивалентно включению всех опций ниже:
+    // - noImplicitAny: запрещает неявный тип any
+    // - strictNullChecks: null и undefined - отдельные типы
+    // - strictFunctionTypes: строгая проверка типов функций
+    // - strictBindCallApply: проверка типов для bind/call/apply
+    // - strictPropertyInitialization: свойства классов должны быть инициализированы
+    // - noImplicitThis: this должен иметь явный тип
+    // - alwaysStrict: генерирует "use strict" в каждом файле
     "strict": true,
+    
+    
+    /* ========== ДОПОЛНИТЕЛЬНЫЕ ПРОВЕРКИ КОДА ========== */
+    
+    // Ошибка при неиспользуемых локальных переменных
+    // Помогает находить мертвый код и опечатки
     "noUnusedLocals": true,
+    
+    // Ошибка при неиспользуемых параметрах функции
+    // Можно обойти через префикс _ (например: _unusedParam)
     "noUnusedParameters": true,
+    
+    // Разрешает стирание только определенных конструкций TypeScript
+    // Запрещает enum (рекомендуется использовать union types или const enums)
     "erasableSyntaxOnly": true,
+    
+    // Ошибка при отсутствии break/return в case блоках switch
+    // Предотвращает случайное "проваливание" в следующий case
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    
+    // Проверяет импорты, которые могут иметь побочные эффекты
+    // Помогает избежать неожиданного поведения при импорте модулей
+    "noUncheckedSideEffectImports": true,
+    
+    
+    /* ========== ДОПОЛНИТЕЛЬНЫЕ BEST PRACTICES ========== */
+    
+    // Не разрешать недостижимый код (после return, throw и т.д.)
+    "allowUnreachableCode": false,
+    
+    // Не разрешать неиспользуемые метки (labels)
+    "allowUnusedLabels": false,
+    
+    // Проверять правильность вызова встроенных методов
+    "noImplicitOverride": true,
+    
+    // Запрещает неявные возвраты из функций с явным типом возврата
+    "noImplicitReturns": true,
+    
+    // Строгая проверка доступа к свойствам через индекс
+    "noUncheckedIndexedAccess": true,
+    
+    // Проверяет, что методы this правильно переопределены в наследниках
+    "noPropertyAccessFromIndexSignature": false,
+    
+    // Разрешает JSON импорты
+    "resolveJsonModule": true,
+    
+    // Изолирует каждый файл (не зависит от других файлов при транспиляции)
+    "isolatedModules": true,
+    
+    // Включает декораторы ES (новый стандарт, а не legacy)
+    "experimentalDecorators": false
   },
-  "include": ["vite.config.ts"]
+  
+  // Файлы, которые должны обрабатываться этой конфигурацией
+  "include": [
+    "vite.config.ts"
+    // Можно добавить другие конфигурационные файлы:
+    // "vitest.config.ts",
+    // "playwright.config.ts"
+  ]
 }

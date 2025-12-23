@@ -1,34 +1,222 @@
 {
+  /**
+   * КОНФИГУРАЦИЯ TYPESCRIPT ДЛЯ FRONTEND ПРИЛОЖЕНИЯ
+   * ================================================
+   * Эта конфигурация используется для исходного кода React приложения.
+   * Включает оптимизации для браузерного окружения и React/JSX.
+   */
+  
   "compilerOptions": {
+    /* ========== ИНКРЕМЕНТАЛЬНАЯ КОМПИЛЯЦИЯ ========== */
+    
+    // Путь к файлу для кеширования информации о компиляции
+    // Ускоряет повторные сборки, сохраняя информацию о типах
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    
+    
+    /* ========== ЦЕЛЕВОЕ ОКРУЖЕНИЕ (БРАУЗЕР) ========== */
+    
+    // Версия ECMAScript для генерируемого JavaScript кода
+    // ES2022 поддерживается всеми современными браузерами (Chrome 94+, Firefox 93+, Safari 16+)
+    // Включает: top-level await, class fields, private methods, Error.cause и т.д.
     "target": "ES2022",
+    
+    // Использовать стандартную семантику полей классов (ES2022+)
+    // true = поля инициализируются как свойства (современный подход)
+    // false = через Object.defineProperty (legacy)
     "useDefineForClassFields": true,
+    
+    // Библиотеки типов, доступные в коде
+    // ES2022 - современные JavaScript API
+    // DOM - браузерные API (window, document, HTMLElement и т.д.)
+    // DOM.Iterable - итераторы для DOM коллекций (NodeList, HTMLCollection)
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    
+    // Система модулей для генерируемого кода
+    // ESNext = современные ES модули (import/export), оптимально для Vite
     "module": "ESNext",
+    
+    // Дополнительные пакеты с типами для включения
+    // vite/client предоставляет типы для Vite специфичных возможностей:
+    // - import.meta.env (переменные окружения)
+    // - import.meta.hot (Hot Module Replacement)
+    // - импорт статических ресурсов (images, CSS и т.д.)
     "types": ["vite/client"],
-    "skipLibCheck": true,
-
-    /* Bundler mode */
+    
+    
+    /* ========== РЕЖИМ СБОРЩИКА (BUNDLER MODE) ========== */
+    
+    // Стратегия разрешения модулей - "bundler" оптимизирована для Vite/Webpack
+    // Понимает package.json exports, conditions и другие современные возможности
+    // Работает корректно с монорепозиториями и сложными зависимостями
     "moduleResolution": "bundler",
+    
+    // Разрешает импорт файлов с расширением .ts/.tsx
+    // import Component from './Component.tsx' - будет работать
+    // Полезно для явности и совместимости с некоторыми инструментами
     "allowImportingTsExtensions": true,
+    
+    // Строгий режим синтаксиса модулей
+    // Различает import type {} (только типы) и import {} (значения)
+    // Улучшает tree-shaking и размер бандла
     "verbatimModuleSyntax": true,
+    
+    // Принудительное определение файлов как модулей
+    // Даже без import/export файл считается модулем (не глобальным скриптом)
+    // Предотвращает конфликты имен между файлами
     "moduleDetection": "force",
+    
+    // Не генерировать JavaScript файлы
+    // Vite сам компилирует TypeScript через esbuild, нам нужна только проверка типов
     "noEmit": true,
+    
+    
+    /* ========== JSX / REACT ========== */
+    
+    // Режим трансформации JSX
+    // "react-jsx" = новый JSX transform (React 17+)
+    // Не требует import React в каждом файле с JSX
+    // Генерирует более оптимизированный код
     "jsx": "react-jsx",
-
-    /* Path Aliases - соответствует настройкам в vite.config.ts */
+    
+    // Альтернативы:
+    // "react" - старый transform, требует import React
+    // "preserve" - оставляет JSX как есть (для Babel)
+    // "react-jsxdev" - development версия с дополнительными проверками
+    
+    
+    /* ========== ПУТИ И АЛИАСЫ ========== */
+    
+    // Базовый путь для разрешения не-относительных импортов
+    // "." означает корень проекта (где находится tsconfig.json)
     "baseUrl": ".",
+    
+    // Алиасы путей для удобного импорта
+    // "@/*" означает "src/*"
+    // Пример: import Button from '@/components/Button'
+    // вместо:  import Button from '../../components/Button'
+    // ВАЖНО: алиасы должны совпадать с настройками в vite.config.ts!
     "paths": {
       "@/*": ["src/*"]
+      // Можно добавить дополнительные алиасы:
+      // "@components/*": ["src/components/*"],
+      // "@hooks/*": ["src/hooks/*"],
+      // "@utils/*": ["src/utils/*"]
     },
-
-    /* Linting */
+    
+    
+    /* ========== ПРОИЗВОДИТЕЛЬНОСТЬ ========== */
+    
+    // Пропускать проверку типов в .d.ts файлах из node_modules
+    // Значительно ускоряет компиляцию (проверяются только ваши файлы)
+    // Рекомендуется всегда включать в production проектах
+    "skipLibCheck": true,
+    
+    
+    /* ========== СТРОГАЯ ПРОВЕРКА ТИПОВ ========== */
+    
+    // Включает все строгие проверки TypeScript (ОБЯЗАТЕЛЬНО для качественного кода!)
+    // strict: true эквивалентно включению всех следующих опций:
+    //   - noImplicitAny: запрещает неявный тип any
+    //   - strictNullChecks: null и undefined - отдельные типы, требуют явной проверки
+    //   - strictFunctionTypes: строгая проверка совместимости типов функций
+    //   - strictBindCallApply: проверка типов для bind/call/apply
+    //   - strictPropertyInitialization: свойства классов должны быть инициализированы
+    //   - noImplicitThis: this должен иметь явный тип
+    //   - alwaysStrict: генерирует "use strict" в каждом файле
+    //   - useUnknownInCatchVariables: тип error в catch - unknown (не any)
     "strict": true,
+    
+    
+    /* ========== ДОПОЛНИТЕЛЬНЫЕ ПРОВЕРКИ КАЧЕСТВА КОДА ========== */
+    
+    // Ошибка при неиспользуемых локальных переменных
+    // Помогает находить мертвый код и опечатки в именах
+    // Можно обойти через префикс _ (например: _unusedVar)
     "noUnusedLocals": true,
+    
+    // Ошибка при неиспользуемых параметрах функции
+    // В React часто полезно для обработчиков событий
+    // Можно обойти через префикс _ (например: _event)
     "noUnusedParameters": true,
+    
+    // Разрешает стирание только определенных конструкций TypeScript
+    // Запрещает enum (используйте union types или const enums)
+    // Запрещает namespace (используйте ES модули)
     "erasableSyntaxOnly": true,
+    
+    // Ошибка при отсутствии break/return в case блоках switch
+    // Предотвращает случайное "проваливание" в следующий case
+    // Частая причина багов в JavaScript
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    
+    // Проверяет импорты, которые могут иметь побочные эффекты
+    // Помогает избежать неожиданного поведения при импорте модулей
+    // Особенно важно для tree-shaking
+    "noUncheckedSideEffectImports": true,
+    
+    
+    /* ========== ДОПОЛНИТЕЛЬНЫЕ BEST PRACTICES ========== */
+    
+    // Не разрешать недостижимый код (после return, throw и т.д.)
+    // Помогает находить логические ошибки
+    "allowUnreachableCode": false,
+    
+    // Не разрешать неиспользуемые метки (labels)
+    // Labels редко используются и часто указывают на ошибку
+    "allowUnusedLabels": false,
+    
+    // Требует явное указание override для переопределенных методов
+    // Предотвращает случайное переопределение методов базового класса
+    "noImplicitOverride": true,
+    
+    // Все ветки функции должны возвращать значение
+    // Предотвращает случайные undefined возвраты
+    "noImplicitReturns": true,
+    
+    // Строгая проверка доступа к свойствам через индекс
+    // obj[key] будет иметь тип value | undefined
+    // Заставляет обрабатывать возможное отсутствие свойства
+    "noUncheckedIndexedAccess": true,
+    
+    // Запрещает доступ к свойствам через точку, если тип имеет index signature
+    // Заставляет использовать obj['key'] вместо obj.key для динамических свойств
+    "noPropertyAccessFromIndexSignature": false,
+    
+    // Разрешает импорт JSON файлов как модулей
+    // import data from './config.json'
+    "resolveJsonModule": true,
+    
+    // Изолирует каждый файл при транспиляции
+    // Необходимо для работы с Vite/esbuild
+    // Запрещает const enum, namespace и некоторые другие возможности
+    "isolatedModules": true,
+    
+    // НЕ использовать legacy декораторы
+    // Ожидаем нового стандарта ECMAScript decorators
+    // Если нужны декораторы (MobX, Angular), используйте Babel
+    "experimentalDecorators": false,
+    
+    // Сохранять JSDoc комментарии в .d.ts файлах
+    // Полезно для документации библиотек
+    "removeComments": false,
+    
+    // Включить все проверки для strict mode
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  
+  // Файлы и папки, которые должны обрабатываться этой конфигурацией
+  "include": [
+    "src" // Весь исходный код приложения
+  ],
+  
+  // Файлы и папки для исключения (опционально)
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+    // Тесты можно вынести в отдельную конфигурацию (tsconfig.test.json)
+  ]
 }
