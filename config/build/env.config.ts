@@ -4,8 +4,8 @@
 // Настройки для работы с .env файлами
 // ============================================================================
 
-import { loadEnv } from "vite";
-import type { EnvVariables } from "./types";
+import { loadEnv } from 'vite'
+import type { EnvVariables } from './types'
 
 // ============================================================================
 // ЗАГРУЗКА ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
@@ -30,7 +30,7 @@ import type { EnvVariables } from "./types";
  * @param mode - режим сборки ('development' | 'production')
  */
 export function loadEnvironment(mode: string): EnvVariables {
-  return loadEnv(mode, process.cwd(), "") as EnvVariables;
+	return loadEnv(mode, process.cwd(), '') as EnvVariables
 }
 
 /**
@@ -43,5 +43,5 @@ export function loadEnvironment(mode: string): EnvVariables {
  * в клиентском коде - они могут содержать секретные данные!
  */
 export function getEnvPrefix(): string {
-  return "VITE_";
+	return 'VITE_'
 }

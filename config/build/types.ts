@@ -9,10 +9,10 @@
  * Содержит информацию о текущем режиме и команде сборки
  */
 export interface ConfigContext {
-  /** Режим сборки: 'development' | 'production' | 'test' */
-  mode: string;
-  /** Команда запуска: 'serve' | 'build' */
-  command: "serve" | "build";
+	/** Режим сборки: 'development' | 'production' | 'test' */
+	mode: string
+	/** Команда запуска: 'serve' | 'build' */
+	command: 'serve' | 'build'
 }
 
 /**
@@ -20,14 +20,14 @@ export interface ConfigContext {
  * Загружаются из .env файлов
  */
 export interface EnvVariables {
-  /** Порт для dev сервера */
-  VITE_PORT?: string;
-  /** Порт для preview сервера */
-  VITE_PREVIEW_PORT?: string;
-  /** URL API для проксирования */
-  VITE_API_URL?: string;
-  /** Базовый URL приложения */
-  VITE_BASE_URL?: string;
-  /** Все остальные переменные окружения */
-  [key: string]: string | undefined;
+	/** Порт для dev сервера */
+	VITE_PORT?: string
+	/** Порт для preview сервера */
+	VITE_PREVIEW_PORT?: string
+	/** URL API для проксирования */
+	VITE_API_URL?: string
+	/** Базовый URL приложения */
+	VITE_BASE_URL?: string
+	/** Все остальные переменные окружения */
+	[key: string]: string | undefined
 }

@@ -1,40 +1,49 @@
 {
-  "name": "template_for_projects",
-  "version": "1.0.0",
-  "main": "main.js",
-  "description": "",
-  "private": true,
-  "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "scripts": {
-    "start": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "props": "cross-env OTHER_ARG=props vite"
-  },
-  "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "cross-env": "^10.1.0",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "npm:rolldown-vite@7.2.5"
-  },
-  "overrides": {
-    "vite": "npm:rolldown-vite@7.2.5"
-  }
+	"name": "template_for_projects",
+	"version": "1.0.0",
+	"main": "main.js",
+	"description": "",
+	"private": true,
+	"type": "module",
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"scripts": {
+		"start": "vite",
+		"build": "tsc -b && vite build",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"preview": "vite preview",
+		"props": "cross-env OTHER_ARG=props vite"
+	},
+	"dependencies": {
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.39.1",
+		"@types/node": "^24.10.1",
+		"@types/react": "^19.2.5",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^5.1.1",
+		"cross-env": "^10.1.0",
+		"eslint": "^9.39.1",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-import-resolver-typescript": "^4.4.4",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-jsx-a11y": "^6.10.2",
+		"eslint-plugin-prettier": "^5.5.5",
+		"eslint-plugin-react": "^7.37.5",
+		"eslint-plugin-react-hooks": "^7.0.1",
+		"eslint-plugin-react-refresh": "^0.4.24",
+		"eslint-plugin-unused-imports": "^4.3.0",
+		"globals": "^16.5.0",
+		"prettier": "^3.8.0",
+		"typescript": "~5.9.3",
+		"typescript-eslint": "^8.46.4",
+		"vite": "npm:rolldown-vite@7.2.5"
+	},
+	"overrides": {
+		"vite": "npm:rolldown-vite@7.2.5"
+	}
 }

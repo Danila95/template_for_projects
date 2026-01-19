@@ -4,8 +4,8 @@
 // Плагины расширяют функциональность Vite
 // ============================================================================
 
-import react from "@vitejs/plugin-react";
-import type { PluginOption } from "vite";
+import react from '@vitejs/plugin-react'
+import type { PluginOption } from 'vite'
 
 // ============================================================================
 // ЭКСПОРТ КОНФИГУРАЦИИ ПЛАГИНОВ
@@ -17,12 +17,12 @@ import type { PluginOption } from "vite";
 // ============================================================================
 
 export function getPluginsConfig(): PluginOption[] {
-  return [
-    react({
-      // Babel plugins для дополнительных возможностей (опционально)
-      // babel: {
-      //   plugins: ['@emotion/babel-plugin'] // пример для Emotion CSS-in-JS
-      // }
-    }),
-  ];
+	return [
+		react({
+			// Babel plugins для дополнительных возможностей (опционально)
+			// babel: {
+			//   plugins: ['@emotion/babel-plugin'] // пример для Emotion CSS-in-JS
+			// }
+		}),
+	]
 }

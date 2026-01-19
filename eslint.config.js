@@ -1,23 +1,23 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
+// ============================================================================
+// Этот файл использует модульную структуру конфигурации из папки config/eslint
+// Все настройки разделены на логические модули для лучшей организации
+// и поддержки кода
+// ============================================================================
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-  },
-])
+import { createESLintConfig } from './config/eslint/index.js'
+
+// ============================================================================
+// ЭКСПОРТ КОНФИГУРАЦИИ
+// ============================================================================
+// Используем ESLint Flat Config (v9+)
+// Конфигурация создаётся из модулей в config/eslint:
+// - types.ts           - TypeScript типы
+// - ignores.config.ts  - игнорируемые файлы
+// - globals.config.ts  - глобальные переменные
+// - base.config.ts     - базовые правила JavaScript
+// - typescript.config.ts - правила TypeScript
+// - react.config.ts    - правила React и React Hooks
+// - index.ts           - главный модуль, объединяющий всё
+// ============================================================================
+
+export default createESLintConfig()
