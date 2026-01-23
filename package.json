@@ -11,6 +11,10 @@
 	"scripts": {
 		"start": "vite",
 		"build": "tsc -b && vite build",
+    "lint:ts": "eslint \"**/*.{ts,tsx}\" --config ./config/eslint/.eslintrc.cjs",
+    "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix --config ./config/eslint/.eslintrc.cjs",
+    "lint:scss": "npx stylelint \"**/*.scss\" --config ./config/stylelint/.stylelintrc.json",
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix --config ./config/stylelint/.stylelintrc.json",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
 		"preview": "vite preview",
